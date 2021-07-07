@@ -1,25 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Counter from './counter';
+import MapValue from './mapValue';
+import Api_work2 from './api-workshop2';
 
-function App() {
+const GetnickName = (props) =>  {
+  return (
+    <h1>Hi,{props.name}</h1>
+  );
+ }
+
+// function GetnickName (props) {
+//   return (
+//     <h1>Hi,{props.name}</h1>
+//   )
+// }
+const App =( ) => {
+  // constructor(props){
+  //   super(props)
+  //   this.state
+  // }
+ 
+ const getHello = ()=>"Hello World"
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <header className="App-header"></header> */}
+        {/* <h1>{getHello()}</h1>
+        <GetnickName name="Chon"/>
+        <Counter />
+        <MapValue /> */}
+        <Api_work2 />
+        {/* <CardExampleImageCard title="hello"/> */}
+    
     </div>
   );
-}
+ }
+// import React from 'react'
+
 
 export default App;
