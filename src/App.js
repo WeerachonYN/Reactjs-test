@@ -1,9 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './css/App.css';
 import React from 'react';
-import Counter from './counter';
-import MapValue from './mapValue';
-import Api_work2 from './api-workshop2';
+import Counter from './testReact/counter';
+// import MapValue from './mapValue';
+import Page404 from './page404';
+import Header from './component/Header';
+import Api_work2 from './testReact/api-workshop2';
+import Login from './testReact/login';
+import {Switch, Route} from'react-router';
 
 const GetnickName = (props) =>  {
   return (
@@ -11,32 +15,26 @@ const GetnickName = (props) =>  {
   );
  }
 
-// function GetnickName (props) {
-//   return (
-//     <h1>Hi,{props.name}</h1>
-//   )
-// }
+
 const App =( ) => {
-  // constructor(props){
-  //   super(props)
-  //   this.state
-  // }
- 
+
  const getHello = ()=>"Hello World"
   return (
     <div className="App">
-      {/* <header className="App-header"></header> */}
-        {/* <h1>{getHello()}</h1>
-        <GetnickName name="Chon"/>
-        <Counter />
-        <MapValue /> */}
-        <Api_work2 />
-        {/* <CardExampleImageCard title="hello"/> */}
-    
+     
+        <Header />
+        <Switch>
+            <Route path="/" exact><Counter /></Route>
+            <Route path="/api"><Api_work2 /></Route>
+            <Route path="/login"><Login /></Route>
+            <Route path="*"><Page404 /></Route>
+          
+       </Switch>
+ 
     </div>
   );
  }
-// import React from 'react'
+
 
 
 export default App;
