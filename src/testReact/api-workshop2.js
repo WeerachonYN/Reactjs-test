@@ -1,14 +1,13 @@
 import axios from 'axios';
 import React from 'react'
-import { Loader } from 'semantic-ui-react'
-import { List } from 'semantic-ui-react'
-import CardExampleImageCard from './component/cart';
+
+import '../css/api-workshop2.css'
+import CardProduct from '../component/Card';
 class Api_work2 extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            products:[],
-            is_true:true
+            products:[]
         }
 
     }
@@ -21,13 +20,8 @@ class Api_work2 extends React.Component{
             this.setState({products})
        
         }).catch((e)=>{
-            this.setState(
-                state => ({
-                    is_true:state.false
-                })
-            );
-                
-            console.log(e);
+          
+            console.log(e.message);
             // alert(e.message)
              
         })
@@ -39,17 +33,17 @@ class Api_work2 extends React.Component{
             // {this.state.products.map(item =>
             // <div role="listitem" class="item" key={item.id}>{item.name}</div>
             // )}
-<div class="ui relaxed four column grid">
+<div className="grid">
    
     {this.state.products.map(item =>
-        // <div class="column" key={item.id}><img src={item.image.medium_square_crop} class="ui image"/></div>
-        <CardExampleImageCard 
+        <CardProduct
+        // isloading={item}
+        id={item.id}
         title={item.name}
         image={item.image.medium_square_crop}
         detail={item.detail}
         />
         )}
-      
         </div> 
 
     );
