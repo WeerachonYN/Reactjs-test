@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/header.css'
 import { Button } from 'semantic-ui-react'
-import {Switch, Route} from'react-router';
+
 import {Link} from'react-router-dom';
 export default function Header() {
    

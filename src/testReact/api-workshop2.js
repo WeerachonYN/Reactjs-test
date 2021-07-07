@@ -7,8 +7,7 @@ class Api_work2 extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            products:[],
-            is_true:true
+            products:[]
         }
 
     }
@@ -21,13 +20,8 @@ class Api_work2 extends React.Component{
             this.setState({products})
        
         }).catch((e)=>{
-            this.setState(
-                state => ({
-                    is_true:state.false
-                })
-            );
-                
-            console.log(e);
+          
+            console.log(e.message);
             // alert(e.message)
              
         })
@@ -42,15 +36,14 @@ class Api_work2 extends React.Component{
 <div className="grid">
    
     {this.state.products.map(item =>
-    
         <CardProduct
-        key={item.id}
+        // isloading={item}
+        id={item.id}
         title={item.name}
         image={item.image.medium_square_crop}
         detail={item.detail}
         />
         )}
-      
         </div> 
 
     );
