@@ -6,24 +6,26 @@ import Counter from './testReact/counter';
 import Page404 from './page404';
 import Header from './component/Header';
 import Api_work2 from './testReact/api-workshop2';
-import Login from './testReact/login';
+import Register from './testReact/Register';
 import ViewDetail from './testReact/viewDetail';
-import {Switch, Route} from'react-router';
+import {Switch, Route, Router} from'react-router-dom';
+import Todo from './Reducer/Todo';
 
 const App =( ) => {
   return (
     <div className="App">
      
         <Header />
-        <Switch>
+        
+           <Switch>
             <Route path="/" exact><Counter /></Route>
-            <Route path="/api"><Api_work2 /></Route>
-            <Route path="/login"><Login /></Route>
+            <Route path="/Product/"><Api_work2 /></Route>
+            <Route path="/Register/"><Register /></Route>
             <Route path="/ViewDetail/:paramId/"><ViewDetail /></Route>
+            <Route path="/Todo/"><Todo/></Route>
             <Route path="*"><Page404 /></Route>
-          
-       </Switch>
- 
+        </Switch>
+  
     </div>
   );
  }

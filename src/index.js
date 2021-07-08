@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'semantic-ui-css/semantic.min.css'
 import {BrowserRouter} from 'react-router-dom';
+import axios from 'axios';
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.headers.common['Authorization']='Bearer ' + localStorage.getItem('token');
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

@@ -8,6 +8,7 @@ class Api_work2 extends React.Component{
         super(props)
         this.state = {
             products:[]
+
         }
 
     }
@@ -15,7 +16,7 @@ class Api_work2 extends React.Component{
     
   
     componentDidMount(){
-        axios.get("http://127.0.0.1:8000/product/").then(response => {
+        axios.get("/product/").then(response => {
             const products = response.data.data.results;
             this.setState({products})
        
@@ -29,14 +30,15 @@ class Api_work2 extends React.Component{
     }
     
     render (){
+
     return (
-            // {this.state.products.map(item =>
-            // <div role="listitem" class="item" key={item.id}>{item.name}</div>
-            // )}
-<div className="grid">
-   
+        <div className="container">
+                  <h1>Product All</h1>
+    <div className="grid">
+    {/* <Grid columns={5} divided>
+    <Grid.Row> */}
     {this.state.products.map(item =>
-        <CardProduct
+        <CardProduct key={item.id}
         // isloading={item}
         id={item.id}
         title={item.name}
@@ -44,7 +46,11 @@ class Api_work2 extends React.Component{
         detail={item.detail}
         />
         )}
+          {/* </Grid.Row>
+            </Grid> */}
         </div> 
+
+        </div>
 
     );
 }
