@@ -62,8 +62,7 @@ export default function Register() {
         </Form>
         </div>
         <br />
-        <hr/>
-        <Login/>
+      
         </div>
     )
 }

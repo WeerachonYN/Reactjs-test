@@ -3,9 +3,13 @@ import {useState} from 'react';
 import { Button, Form } from 'semantic-ui-react'
 import axios from 'axios';
 import '../css/login.css';
-import  { Redirect } from 'react-router-dom'
+import { useDispatch,useSelector } from 'react-redux';
+import { fetchAuthAsync } from '../actions/auth/authActions';
 export default function Login() {
       const [form,setForm] = useState(null);
+      const dispatch = useDispatch();
+      const {loading,error} = useSelector(state => state.status)
+
       const handleSubmit = (e) => {
         e.preventDefault();
         const {username,password} = e.target.elements;
@@ -13,31 +17,15 @@ export default function Login() {
           username:username.value,
           password:password.value,
         }
-        axios.post('/token/',data).then(val =>{
-          localStorage.setItem('token',val.data.access);
-          setForm(true)
-          console.log(val.statusText)
-        }).catch(e => {
-          setForm(false)
-            // alert(e.message)
-            console.log(e.message);
-          })
-        // setForm(data)
+        if(loading){
+          alert('Loading....')
+        }
+        if(error){
+          alert(error)
+        }
        
+       return dispatch(fetchAuthAsync(data))
       } 
-      if(form){
-        return <Redirect to='/' />
-      }
- 
-    //   function checkStatus(response) {
-    //     if (response.status >= 200 && response.status < 400) {
-    //         return response;
-    //     }
-    //     const error = new Error(response.statusText);
-    //     error.response = response;
-    //     throw error
-    // }
-    
     return (
         <div className="container">
             <br />
@@ -47,13 +35,13 @@ export default function Login() {
           <Form onSubmit={handleSubmit}>
           <Form.Field>
             <label>Usename</label>
-            <input name="username" placeholder='Username' />
+            <input name="username"   placeholder='Username' />
           </Form.Field>
           <Form.Field>
             <label>Password</label>
-            <input name="password" type="password" placeholder='Password' />
+            <input name="password"  type="password" placeholder='Password' />
           </Form.Field>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' >Submit</Button>
         </Form>
         </div>
         <br />

@@ -1,9 +1,11 @@
-.row{
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
+.row-detail{
+    display: flex;
+    justify-content: center;
+    /* align-items:; */
+    grid-template-columns: 1fr 1fr ; 
     margin-left: 0;
     margin-right: 0;
-    max-width: 800px;
+    /* max-width: 800px; */
     row-gap: 15px;
     column-gap: 15px;
     padding: 30px;
