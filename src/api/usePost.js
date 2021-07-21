@@ -8,7 +8,7 @@ export default function usePost(url,objectData) {
           .catch(function(error){
             console.log(error);
           });
-    }, [])
+    }, [objectData])
 
     return data
 }

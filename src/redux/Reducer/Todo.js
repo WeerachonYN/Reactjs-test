@@ -68,7 +68,8 @@ export default function Todo() {
         })
         setTodos(removeItem)
     }
-    console.log(todos);
+   
+    document.title = 'TODO'
     return (
         <div>{isEditing ? (
             <form onSubmit={handleEditSubmit}>

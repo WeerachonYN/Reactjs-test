@@ -1,27 +1,22 @@
 import axios from 'axios';
 import {React,useEffect,useState} from 'react'
+import {useSelector} from 'react-redux'
 import { Grid, Segment } from 'semantic-ui-react'
 export default function Counter () {
     let currentDate = new Date();
     const [currentUser,setCurrentUser] = useState({});
     const [isCurrentUser,setIscurrentUser] = useState(false);
     const [counter,setCounter] = useState(0); 
-    const [token,setToken] = useState(
-        () => {
-            const access_token = JSON.parse(localStorage.getItem('token'));
-            if (access_token) {
-                return access_token.access;
-            } else {
-                return [];
-            }
-        }
-    );
-    // arrow fucn
+    const {token} = useSelector(state => state.auth)
+
     useEffect(() => {
+        document.title = "HOME"
+        console.log('token',token);
         const config = {
             headers:{
-                Authorization:`Bearer ${token}`
+                Authorization:`Bearer ${token?.access||token}`
             }
+
         };
 
         axios.get('/users/',config).then(
