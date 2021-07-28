@@ -48,7 +48,7 @@ export async function DeleteCart({ payload,token }) {
     };
 
     const response = await axios.delete(`/cart/${payload}/`, config);
-    console.log('RESPONSE_FETCH', response.data);
+    // console.log('RESPONSE_FETCH', response.data);
     return response.data
   } catch (error) {
     console.log(error);
@@ -67,7 +67,7 @@ export async function UpdateCart({ payload,token }) {
     const response = await axios.patch(`/cart/${payload.id}/`,{
       quantity: payload.quantity
     }, config);
-    console.log('RESPONSE_FETCH', response.data);
+    // console.log('RESPONSE_FETCH', response.data);
     return response.data
   } catch (error) {
     console.log(error);

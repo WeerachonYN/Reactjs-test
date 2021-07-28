@@ -4,3 +4,15 @@ export async function authUser(data) {
       return  userData
   
   }
+
+export async function getUser(data) {
+    const config = {
+        headers:{
+            Authorization:`Bearer ${data.access}`
+        }
+
+    };
+      const response = await axios.get('/users/',config);
+      return  response.data
+  
+  }

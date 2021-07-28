@@ -44,7 +44,7 @@ export function cartReducer(state=initialState,action){
                 error:action.payload
             }
         case FETCH_CART:
-            console.log('FETCH_CART:',action.payload);
+          
             return  {...state,
                         cart:action.payload}
 

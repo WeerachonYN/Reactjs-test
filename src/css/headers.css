@@ -1,0 +1,99 @@
+.top-header-box{
+    display: flex;
+    box-sizing: content-box;
+    justify-content: end;
+    /* text-align: center; */
+    max-width: 75%;
+    margin: auto;
+   padding-top: 20px !important;
+   padding-bottom: 20px !important;
+   align-items: center !important;
+}
+.item-header-box1{
+    display: block;
+    box-sizing: content-box;
+    width: 33.33%;
+    cursor: pointer;
+ 
+}
+.item-header-box2{
+    display: block;
+    box-sizing: content-box;
+    width: 33.33%;
+    text-align: center;
+    /* justify-content: end;
+     */
+   
+    /* width: 150px; */
+}
+.input-search{
+    width: 100%;
+}
+.item-header-box3{
+    display: block;
+    box-sizing: content-box;
+    width: 33.33%;
+    text-align: end;
+    /* padding: 5px; */
+    /* margin: auto; */
+ 
+}
+.title-name{
+    font-family: 'Krub', sans-serif !important;
+    font-weight: Bold !important;
+    color: crimson !important;
+}
+.icon-item-header-user{
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+.icon-item-header{
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+/* .wrapper-top{
+    background-color: #ed1d24 ;
+} */
+/* .warper-head{
+    background-color: #db2828;
+} */
+
+.icon-item-header-user{
+    transition: transform 0.5s ease !important;
+}
+.icon-item-header-user:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+    z-index: 1;
+  }
+
+.header-box{
+    display: block;
+    max-width: 74.55%;
+    align-items:center;
+    margin: auto;
+    /* padding: 5px; */
+    /* background-color: #c71016; */
+}
+.item-header{
+    padding: 10px;
+    
+ 
+    /* background-color: red; */
+}
+.icon-item-header {
+    transition: transform 0.5s ease;
+    /* transition: color 0.5s ease-out; */
+    /* z-index: 1; */
+  }
+  .icon-item-header:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+    color: red;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+  }

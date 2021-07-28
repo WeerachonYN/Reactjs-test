@@ -8,7 +8,7 @@ import ListHorizontal from '../component/List';
 import { FETCH_PRODUCT_ALL_REQ } from '../redux/Reducer/action.type';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-const Category = () => {
+const CategoryDetail = () => {
     const [data, setData] = useState()
     const { dataAll } = useSelector(state => state.category)
     const dispatch = useDispatch();
@@ -77,4 +77,4 @@ const Category = () => {
 
 
 }
-export default Category;
+export default CategoryDetail;

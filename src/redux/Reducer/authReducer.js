@@ -3,10 +3,13 @@ import {
     AUTH_START,
     AUTH_END,
     AUTH_ERROR,
+    GET_USER,
 } from './action.type'
 const initialState ={
     token:null,
+    user:null,
     loading:false,
+    time:null,
     error:''
 }
 export function authReducer(state=initialState,action){
@@ -18,11 +21,16 @@ export function authReducer(state=initialState,action){
             loading:true
         }
        case SET_AUTH:
-        console.log('FETCH_AUTH:',action.payload);
             return {
                 ...state,
                 token:action.payload,
+                time:(Date.now()/1000)+action.payload.expires_in
             }
+        case GET_USER:
+                return {
+                    ...state,
+                    user:action.payload,
+                }
             
         case AUTH_END:
         return {

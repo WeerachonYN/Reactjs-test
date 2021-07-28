@@ -1,0 +1,13 @@
+.image-invoidDetail{
+    cursor: pointer;
+}
+.image-invoidDetail {
+    transition: filter 0.5s ease-out;
+  }
+  .image-invoidDetail:hover {
+    -ms-filter: contrast(13%); /* IE 9 */
+    -webkit-filter: contrast(13%); /* Safari 3-8 */
+    filter: contrast(13%); 
+
+    z-index: 1;
+  }

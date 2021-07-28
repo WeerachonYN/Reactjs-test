@@ -1,9 +1,8 @@
 
   .AppContent {
-    /* background-color: rgba(229, 255, 0, 0.404); */
-    padding: 1.5rem 2rem 35px 2rem;
+   
+    padding-bottom: 50px!important;
     min-height: 100%;
-    /* text-align: center; */
     position: relative;
   }
   

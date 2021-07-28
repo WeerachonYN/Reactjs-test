@@ -7,13 +7,13 @@ export function* fetchCartAsync({payload,token}){
     
     try{
         // yield put({type:CART_START})
-        let responses = yield call(fetchCart,{payload,token});
-        yield console.log('FETCH_CART_RESPONSE:',responses?.data);
+        yield call(fetchCart,{payload,token});
+        // yield console.log('FETCH_CART_RESPONSE:',responses?.data);
         yield put({type:CART_ERROR,payload:null})
         yield put({type:FETCH_LOGIN_CART_REQ,payload:token})
         // yield put({type:CART_END})
     } catch(error){
-        yield console.log('ERROR CART_FETCH',error.response);
+        // yield console.log('ERROR CART_FETCH',error.response);
       yield put({type:CART_ERROR,payload:error.response?.data || error})
         
     //   yield put({type:CART_END})
@@ -38,11 +38,11 @@ export function* deleteCart({payload,token}){
     }   
 }
 export function* updateCart({payload,token}){
-    yield console.log('Payload Update:',payload);
+    // yield console.log('Payload Update:',payload);
     try{
         yield put({type:CART_START})
         let responses = yield call(UpdateCart,{payload,token});
-        yield console.log('DELETE_CART_RESPONSE:',responses);
+        // yield console.log('DELETE_CART_RESPONSE:',responses);
         yield put({type:FETCH_LOGIN_CART_REQ,payload:token});
         yield put({type:CART_ERROR,payload:null})
         yield put({type:CART_END})
@@ -55,7 +55,7 @@ export function* updateCart({payload,token}){
 }
 
 export function* fetchOnLogin({payload}) {
-    console.log('FETCH_LOGIN_CART:',payload);
+    // console.log('FETCH_LOGIN_CART:',payload);
     try{
         let responses = yield call(fetchLoginCart,payload);
         // yield console.log('FETCH_CART_RESPONSE:',responses);

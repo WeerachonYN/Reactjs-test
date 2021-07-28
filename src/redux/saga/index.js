@@ -1,11 +1,11 @@
 import { takeEvery, all } from "@redux-saga/core/effects";
 import { fetchCartAsync, fetchOnLogin } from "./cartActions";
-import { fetchAuthAsync } from "../saga/authActions";
-import { SEARCH_WORD_REQ, FETCH_AUTH_REQ, FETCH_CART_REQ, FETCH_LOGIN_CART_REQ, FETCH_PRODUCT_REQ, DELETE_CART_REQ, UPDATE_CART_REQ, CHECK_INVOID_REQ, FETCH_PRODUCT_ALL_REQ, FETCH_CATEGORY_REQ,SORT_WORD_REQ, CATEGORY_IN_REQ, CATEGORY_NOT_IN_REQ, PAGE_PRODUCT_REQ, PAGESIZE_PRODUCT_REQ, FETCH_INVOID_REQ } from '../Reducer/action.type'
-import { fetchProductAsync, fetchProductALL, searchProduct, sortProduct, cate_in_Product, cate_notIn_Product, page_Product, pageSize_Product } from "./productAction";
+import { fetchAuthAsync ,fetchUser} from "../saga/authActions";
+import { SEARCH_WORD_REQ, GET_USER_REQ,GET_INVOID_REQ,FETCH_AUTH_REQ, FETCH_CART_REQ, FETCH_LOGIN_CART_REQ, FETCH_PRODUCT_REQ, DELETE_CART_REQ, UPDATE_CART_REQ, CHECK_INVOID_REQ, FETCH_PRODUCT_ALL_REQ, FETCH_CATEGORY_REQ,SORT_WORD_REQ, CATEGORY_IN_REQ, CATEGORY_NOT_IN_REQ, PAGE_PRODUCT_REQ, PAGESIZE_PRODUCT_REQ, FETCH_INVOID_REQ, SUBMIT_VOID_REQ, GET_USER, GET_COMMENT_REQ, SET_COMMENT_REQ } from '../Reducer/action.type'
+import { fetchProductAsync, fetchProductALL, searchProduct, sortProduct, cate_in_Product, cate_notIn_Product, page_Product, pageSize_Product, getCOMMENT, setCOMMENT } from "./productAction";
 import { deleteCart, updateCart } from './cartActions'
 import { fetchCategoryALL } from "./categoryAction";
-import { checkOutInvoid,getInvoid } from "./invoidAction";
+import { checkOutInvoid,getInvoid ,getDetailInvoid, submitVoid} from "./invoidAction";
 
 // #CRUDto cart 
 
@@ -16,7 +16,9 @@ function* watchUpdateCart() { yield takeEvery(UPDATE_CART_REQ, updateCart) }
 function* watchfetchAuthAsync() {
     yield takeEvery(FETCH_AUTH_REQ, fetchAuthAsync)
 }
-
+function* watchfetUser(){
+    yield takeEvery(GET_USER_REQ,fetchUser)
+}
 
 // # CART API
 function* watchFetchCARTAsync() {
@@ -52,6 +54,13 @@ function* watchPage() {
 function* watchPage_size() {
     yield takeEvery(PAGESIZE_PRODUCT_REQ, pageSize_Product)
 }
+// #Comment
+function* watchGetComment() {
+    yield takeEvery(GET_COMMENT_REQ, getCOMMENT)
+}
+function* watchSetComment() {
+    yield takeEvery(SET_COMMENT_REQ, setCOMMENT)
+}
 // #category
 function* watchFetchCategoryAll() {
     yield takeEvery(FETCH_CATEGORY_REQ, fetchCategoryALL)
@@ -64,6 +73,13 @@ function* watchCheckOUT() {
 function* watchFetchInvoid() {
     yield takeEvery(FETCH_INVOID_REQ, getInvoid)
 }
+function* watchGetInvoid(){
+    yield takeEvery(GET_INVOID_REQ,getDetailInvoid)
+}
+function* watchSubmitVoid(){
+    yield takeEvery(SUBMIT_VOID_REQ,submitVoid)
+}
+
 export default function* rootSaga() {
     yield all([
 
@@ -77,10 +93,14 @@ export default function* rootSaga() {
         watchCategory_not_in(),
         watchPage(),
         watchPage_size(),
+        //#Comment
+        watchGetComment(),
+        watchSetComment(),
         // #Category
         watchFetchCategoryAll(),
         // # auth
         watchfetchAuthAsync(),
+        watchfetUser(),
 
         // #cart API
         watchFetchCARTAsync(),
@@ -91,6 +111,8 @@ export default function* rootSaga() {
         // #Invoid
         watchCheckOUT(),
         watchFetchInvoid() ,
+        watchGetInvoid(),
+        watchSubmitVoid(),
 
 
     ])

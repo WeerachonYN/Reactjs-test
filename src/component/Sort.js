@@ -2,15 +2,24 @@ import React,{useState}from 'react'
 import { Dropdown,Grid } from 'semantic-ui-react'
 import { useDispatch,useSelector } from 'react-redux';
 import { SORT_WORD_REQ } from '../redux/Reducer/action.type';
+import { useHistory } from 'react-router-dom';
 
 const Sort = () => {
     const dispatch = useDispatch();
     const [state,setState] = useState('asc');
     const {sort} = useSelector(state => state.product)
+    const {category_in} = useSelector(state => state.product)
+    const history = useHistory()
     const handleClickSort = (sort) =>{
         
         console.log('sort:',sort);
-        return dispatch({type:SORT_WORD_REQ,sort:sort})
+        dispatch({type:SORT_WORD_REQ,sort:sort})
+        if(category_in.length != 0){
+            return history.push(`/product/?category_in=${category_in}&sort=${sort}`)
+        }else{
+            return history.push(`/product/?sort=${sort}`)
+        }
+        
     }
     return (
        

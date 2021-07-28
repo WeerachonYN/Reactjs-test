@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux'
 function ButtonAnimated() {
   const {cart} = useSelector((state) => state.cart)
   const history = useHistory();
-  return (<div>
-    <Button animated='vertical' color='red' onClick={() => history.push('/cart/')}>
+  return (
+  <div>
+    <Button animated='vertical' color='red' >
       <Button.Content hidden>Cart</Button.Content>
       <Button.Content visible>
         <Icon name='shop' />

@@ -10,6 +10,7 @@ import {
     CATEGORY_NOT_IN,
     PAGE_PRODUCT,
     PAGESIZE_PRODUCT,
+    SET_COMMENT,
 } from './action.type'
 const initialState = {
     data: null,
@@ -22,11 +23,12 @@ const initialState = {
     page_size: null,
     loading: false,
     error: '',
+    comment:[],
 }
 export function productReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_PRODUCT:
-            console.log('FETCH_PRODUCT', action.payload);
+          
             return {
                 ...state,
                 data: action.payload
@@ -62,7 +64,7 @@ export function productReducer(state = initialState, action) {
                 page_size: action.page_size
             }
         case FETCH_PRODUCT_ALL:
-            console.log('FETCH_PRODUCT_ALL', action.payload);
+        
             return {
                 ...state,
                 dataAll: action.payload
@@ -82,6 +84,11 @@ export function productReducer(state = initialState, action) {
                 ...state,
                 error: action.payload
             }
+            case SET_COMMENT:
+                return {
+                    ...state,
+                    comment:action.payload
+                }
         default:
             return state
     }
