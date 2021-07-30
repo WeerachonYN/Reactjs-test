@@ -48,13 +48,13 @@ function CardProduct(props) {
               </Placeholder>
             ) : (
               <Card.Content>
-                <Card.Header className="card-Header" onClick={handleClick} >{props.title}</Card.Header>
-                <Card.Description >
+                <Card.Header className="card-Header" as="h3" onClick={handleClick} >{props.title}</Card.Header>
+                <Card.Description className="card-descript">
                   {props.detail}
 
                 </Card.Description>
                 <Card.Meta >
-                  <h2>฿ {(props.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</h2>
+                  <h2 className="h2-price">฿ {(props.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</h2>
 
                 </Card.Meta>
               </Card.Content>
@@ -62,8 +62,8 @@ function CardProduct(props) {
           </Card.Content>
 
           <Card.Content extra textAlign="center">
-            <p onClick={handleClick}>
-              <Icon name='comment' />
+            <p className="comment-p" onClick={handleClick}>
+              <Icon name='comment' className="comment-icon" />
               {props.loading?0:props.comment} Comments
             </p>
           </Card.Content>

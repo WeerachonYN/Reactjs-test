@@ -21,3 +21,7 @@
     height: 100%;
     padding: 10px;
   }
+.card-Name:hover{
+  /* transform           : scale(1.09); */
+  color: rgb(255, 0, 55) !important;
+}

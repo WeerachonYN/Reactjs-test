@@ -150,13 +150,18 @@ const Product = () => {
                                             comment={item.comments?.length}
 
                                         />
+                                       
                                         <br />
                                     </Grid.Column>
                                 )}
+                               {/* 1=0? true:false
+                               1=0 ?? true
+                               1=0 && true */}
                             </Grid.Row>
 
                         </Grid>
-                        {data.data.results.length !== 0 ? <Container textAlign="center"><Pagination
+                     
+                        {data.data.results.length !== 0 && <Container textAlign="center"><Pagination
                             onPageChange={(e, d) => onPageClick(e, d)}
                             boundaryRange={0}
                             defaultActivePage={1}
@@ -166,7 +171,7 @@ const Product = () => {
                             siblingRange={1}
                             totalPages={count}
                             activePage={page}
-                        /> </Container> : null}
+                        /> </Container> }
                     </Container>
                 </Grid.Column>
 

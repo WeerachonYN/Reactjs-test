@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { React, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Grid, Image, Container, Card,Segment,Loader, Header, Reveal, Label } from 'semantic-ui-react'
+import { Grid, Image, Container, Card, Segment, Loader, Header, Reveal, Label } from 'semantic-ui-react'
 import AwesomeSlider from 'react-awesome-slider';
 import CardProduct from '../component/Card';
 import 'react-awesome-slider/dist/styles.css';
@@ -71,14 +71,14 @@ export default function Counter() {
         return <DimmerLoader />
     }
     if (!sale) {
-        return <DimmerLoader/>
+        return <DimmerLoader />
     }
     if (!productAll) {
-        return <DimmerLoader/>
+        return <DimmerLoader />
     }
     return (
         <div>
-            <br /><br />
+            <br />
             <Container fluid >
                 <AwesomeSlider >
                     <div data-src='carousel/1.png' />
@@ -88,9 +88,8 @@ export default function Counter() {
                     <div data-src='carousel/5.png' />
                 </AwesomeSlider>
                 <br /> <br /> <br />
-                <Header as='h3' block >
-                    สินค้าแนะนำ
-                </Header>
+                <Segment  inverted ><h3 >สินค้าแนะนำ</h3></Segment>
+
                 <div className="gallery-wrapper">
                     <div className="gallery-scroll">
                         <div className="gallery">
@@ -102,7 +101,7 @@ export default function Counter() {
                                     <Card.Content>
                                         <Card.Header>{item.name}</Card.Header>
                                         <Card.Meta >
-                                            <h2> ฿ {(item.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</h2>
+                                            <h2 className="h2-price"> ฿ {(item.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</h2>
                                         </Card.Meta>
                                         <Card.Description>
                                             {item.detail}
@@ -118,21 +117,21 @@ export default function Counter() {
                 </div>
 
                 <br />
-                <Header as='h3' block>
-                    ประเภทสินค้า ทั้งหมด
-                </Header>
+
+                <Segment inverted ><h3 >ประเภทสินค้า</h3></Segment>
+
+
                 <Gallery />
                 <br />
-                <Header as='h3' block >
-                    <Grid columns='equal'>
-                        <Grid.Column>
-                            สินค้าทั้งหมด
-                        </Grid.Column>
-                        <Grid.Column width={8} textAlign="right">
-                            <a className='a-link' onClick={() => history.push('/product/')}>ดูเพิ่มเติม</a>
-                        </Grid.Column>
-                    </Grid>
-                </Header>
+                <Segment inverted><Grid columns='equal'>
+                    <Grid.Column>
+                        <h3> สินค้าทั้งหมด</h3>
+                    </Grid.Column>
+                    <Grid.Column width={8} textAlign="right">
+                        <a className='a-link' onClick={() => history.push('/product/')}>ดูเพิ่มเติม</a>
+                    </Grid.Column>
+                </Grid></Segment>
+
                 <Grid className="grid-row-product">
 
                     <Grid.Row columns={4} className="grid-row-product" >

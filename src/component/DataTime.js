@@ -1,5 +1,5 @@
 import React from 'react'
-export default function DatetimeForm (updated){
+export default function DatetimeForm(updated) {
     let now = new Date()
     let date = new Date(updated);
     let year = date.getFullYear();
@@ -11,7 +11,8 @@ export default function DatetimeForm (updated){
     let dt_now = now.getDate();
     let month_now = now.getMonth() + 1;
     let year_now = now.getFullYear();
-
+    let hr_now = now.getHours();
+   
     if (min < 10) {
         min = "0" + min;
     }
@@ -29,7 +30,15 @@ export default function DatetimeForm (updated){
     if (hr < 10) {
         hr = "0" + hr;
     }
-    if (dt == dt_now && month == month_now && year == year_now) {
+    if (hr_now < 10) {
+        hr_now = "0" + hr_now;
+    }
+    if (hr_now > 12) {
+        hr_now -= 12;
+    }
+    if (hr_now==hr&&dt == dt_now && month == month_now && year == year_now) { 
+        return ('Just now');
+    } else if (dt == dt_now && month == month_now && year == year_now) {
         return ('Today');
     } else if ((dt_now - dt) == 1) {
         return ('Yesterday' + ' ' + 'at' + ' ' + hr + ':' + min + ampm);

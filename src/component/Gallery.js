@@ -40,7 +40,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >เครื่องใช้ไฟฟ้าขนาดเล็ก</Card.Header>
+                <Card.Header className="card-Name" >เครื่องใช้ไฟฟ้าขนาดเล็ก</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(2)}>
@@ -61,7 +61,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >เครื่องกรองน้ำ</Card.Header>
+                <Card.Header className="card-Name" >เครื่องกรองน้ำ</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(3)}>
@@ -83,7 +83,7 @@ export default function Gallery(props) {
                     </Reveal.Content>
                    
                 </Reveal> 
-                <Card.Header className="card-Header" >เครื่องซักผ้า</Card.Header>
+                <Card.Header className="card-Name" >เครื่องซักผ้า</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(4)}>
@@ -104,7 +104,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >เครื่องปรับอากาศ</Card.Header>
+                <Card.Header className="card-Name" >เครื่องปรับอากาศ</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(5)}>
@@ -125,7 +125,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >ตู้เย็น</Card.Header>
+                <Card.Header className="card-Name" >ตู้เย็น</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(6)}>
@@ -146,7 +146,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >พัดลม</Card.Header>
+                <Card.Header className="card-Name" >พัดลม</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(7)}>
@@ -167,7 +167,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >พัดลม</Card.Header>
+                <Card.Header className="card-Name" >พัดลม</Card.Header>
             </Card.Content>
         </Card>
         <Card className="item-category" onClick={()=> handleClickHis(8)}>
@@ -188,7 +188,7 @@ export default function Gallery(props) {
                         />
                     </Reveal.Content>
                 </Reveal>
-                <Card.Header className="card-Header" >เครื่องทำน้ำอุ่น</Card.Header>
+                <Card.Header className="card-Name" >เครื่องทำน้ำอุ่น</Card.Header>
             </Card.Content>
         </Card>
     </div>
