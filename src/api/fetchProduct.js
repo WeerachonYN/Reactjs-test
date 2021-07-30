@@ -46,13 +46,9 @@ export async function postComment({token,message,product}) {
     return response.data
 }
 
-export async function getComment({token}) {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  };
-  const response = await axios.get('/comment/',config);
+export async function getComment(id) {
+
+  const response = await axios.get(`/comment/${id}/`);
   return response.data
 }
 

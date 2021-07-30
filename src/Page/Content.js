@@ -31,7 +31,7 @@ const Content = () => {
             </Grid.Column>
             <Grid.Column>
              
-                {/* <Segment>3</Segment> */}
+              
             </Grid.Column>
         </Grid>
     );

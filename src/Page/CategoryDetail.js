@@ -29,7 +29,7 @@ const CategoryDetail = () => {
         }
     }
     useEffect(() => {
-        document.title = "CATEGORY"
+        document.title = "METRO - CATEGORY"
         fetchData()
         const filterData = dataAll.find((item) => {
             return item.id == p_id;

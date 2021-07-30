@@ -10,10 +10,11 @@ export default function Login() {
       const [active,setActive] = useState(null);
       const dispatch = useDispatch();
       const {loading,error} = useSelector(state => state.auth)
-      const {token} = useSelector(state => state.auth)
+      const token = useSelector(state => state.auth)
       const history = useHistory();
-      document.title = "LOGIN"
+      document.title = "METRO - LOGIN"
       const action = (type,payload)=>dispatch({type,payload})
+      
       const handleSubmit = (e) => {
         e.preventDefault();
         const {username,password} = e.target.elements;
@@ -24,14 +25,12 @@ export default function Login() {
        
         // dispatch({type:FETCH_PRODUCT_ALL_REQ})
         action(FETCH_AUTH_REQ,data)
-       if(!error){
-         return history.push('/')
-       }
+     
       } 
-      // if(token){
-       
-      //   return history.push('/product/')
-      // }
+  // if(token){
+  //        return history.push('/')
+  //      }
+       console.log('TOKEN_AUTH:',token);
     return (
         <div className="container">
             <br />

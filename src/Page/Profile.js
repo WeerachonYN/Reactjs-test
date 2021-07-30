@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Breadcrumbs from '../component/Breadcrumb'
-import { Container, Grid, Image, Header, Label,Confirm, Icon, Segment, Popup, Form, Button, Reveal, Input } from 'semantic-ui-react'
+import { Container,  Image, Header, Label,Confirm,  Popup, Form, Button,  Input } from 'semantic-ui-react'
 import { useSelector, useDispatch } from 'react-redux'
 import '../css/Profile.css'
 import axios from 'axios'
-import { useHistory } from 'react-router'
+
 import isEmail from 'validator/lib/isEmail';
 import { GET_USER_REQ } from '../redux/Reducer/action.type'
 export default function Profile() {
@@ -16,7 +16,7 @@ export default function Profile() {
     const [email, setEmail] = useState(null);
     const host = process.env.REACT_APP_API_HOST;
     const dispatch = useDispatch();
-    const history = useHistory();
+    document.title = `METRO - ${user.username}`
     const [open_checkout, setOpen_checkout] = useState(false)
     const [open, setOpen] = useState(false)
     const [statefile, setStatefile] = useState(null)

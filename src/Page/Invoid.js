@@ -10,7 +10,7 @@ import { FETCH_INVOID_REQ } from '../redux/Reducer/action.type'
 import { useState } from 'react'
 import Breadcrumbs from '../component/Breadcrumb'
 export default function Invoid() {
-    document.title = "INVOID"
+    document.title = "METRO - INVOID"
     const { token } = useSelector(state => state.auth)
     const { invoid, count } = useSelector(state => state.invoid)
     const [visible, setVisible] = useState(false)

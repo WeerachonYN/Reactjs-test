@@ -13,12 +13,13 @@ export function* fetchAuthAsync({payload}){
             yield put({type:FETCH_LOGIN_CART_REQ,payload:response})
             yield put({type:AUTH_ERROR,payload:null})
             yield put({type:FETCH_CATEGORY_REQ})
-            yield put({type:FETCH_PRODUCT_ALL_REQ})
+            // yield put({type:FETCH_PRODUCT_ALL_REQ})
             yield put({type:FETCH_INVOID_REQ,token:response})
             yield put({type:AUTH_END})
         } catch(error){
+          yield console.log('Error',error.response.data);
           yield put({type:SET_AUTH,payload:null})
-          yield put({type:AUTH_ERROR,payload:error.response?.data || error})
+          yield put({type:AUTH_ERROR,payload:error.response.data})
           yield put({type:AUTH_END})
         }   
    

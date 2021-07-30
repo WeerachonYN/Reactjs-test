@@ -7,7 +7,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { useState } from 'react'
 import Sort from './Sort'
 import { useDispatch } from 'react-redux'
-import { CATEGORY_IN_REQ, GET_INVOID_REQ, SEARCH_WORD_REQ, SORT_WORD_REQ } from '../redux/Reducer/action.type'
+import { CATEGORY_IN_REQ, GET_INVOID_REQ, PAGE_PRODUCT_REQ, SEARCH_WORD_REQ, SORT_WORD_REQ } from '../redux/Reducer/action.type'
 
 import '../css/headers.css'
 import '../css/Dropdown.css'
@@ -28,10 +28,21 @@ const MenuLoginLogout = () => {
   }, [search])
   const onKeyUP = (e) => {
     e.preventDefault()
-    dispatch({ type: SEARCH_WORD_REQ, search: word })
-    dispatch({ type: CATEGORY_IN_REQ, category_in: null });
+    if (word) {
+      dispatch({ type: SEARCH_WORD_REQ, search: word })
+      dispatch({ type: CATEGORY_IN_REQ, category_in: [] });
+      dispatch({ type: SORT_WORD_REQ, sort: null })
+      dispatch({ type: PAGE_PRODUCT_REQ, page: 1 })
+      return history.push(`/product/?search=${word}`)
+    }
+  }
+  const titleClick = () => {
+
+    dispatch({ type: SEARCH_WORD_REQ, search: '' })
+    dispatch({ type: CATEGORY_IN_REQ, category_in: [] });
     dispatch({ type: SORT_WORD_REQ, sort: null })
-    return history.push(`/product/?search=${word}`)
+    dispatch({ type: PAGE_PRODUCT_REQ, page: 1 })
+    return history.push('/')
   }
   return (
     <div className="wrapper-top">
@@ -39,7 +50,7 @@ const MenuLoginLogout = () => {
 
         <div className="item-header-box1">
 
-          <Statistic className="text-title" size="large" onClick={() => history.push('/')}>
+          <Statistic className="text-title" size="large" onClick={() => titleClick()}>
             <Statistic.Label className="title-name">STORE</Statistic.Label>
             <Statistic.Value className="title-name">METRO</Statistic.Value>
           </Statistic>
@@ -48,10 +59,10 @@ const MenuLoginLogout = () => {
           <Input className="input-search" icon='search' size="big" value={word} placeholder='Search...' onBlur={(e) => onKeyUP(e)} onChange={(e) => setWord(e.target.value)} />
         </div>
         <div className="item-header-box3">
-          <Popup content='คำสั่งซื้อของคุณ' trigger={token ? <Icon size="large" className="icon-item-header" name="heart" onClick={() => history.push("/invoid/")} /> : <Icon size="large" className="icon-item-header" name="heart" onClick={() => history.push("/login/")} />} />
+          <Popup content='คำสั่งซื้อของคุณ' trigger={token ? <Icon size="large" className="icon-item-header" name="box" onClick={() => history.push("/invoid/")} /> : <Icon size="large" className="icon-item-header" name="box" onClick={() => history.push("/login/")} />} />
           <Popup content='ตะกร้าสินค้า' trigger={token ? <Icon size="large" className="icon-item-header" name="cart" onClick={() => history.push('/cart/')} /> : <Icon size="large" className="icon-item-header" name="cart" onClick={() => history.push("/login/")} />} />
-          
-          <Popup content={user ? user.username : 'ข้อมูลผู้ใช้'} trigger={!user ? <Icon size="large" className="icon-item-header" name="user" /> : user.images ? <Image onClick={() => history.push('/profile/')} src={host + user.images.image.small_square_crop} avatar className="icon-item-header" /> : <Icon size="large" className="icon-item-header" name="user" onClick={() => history.push('/profile/')} />} />
+
+          <Popup content={user ? user.username : 'เข้าสู่ระบบ'} trigger={!user ? <Icon size="large" className="icon-item-header" name="user" onClick={() => history.push('/login/')} /> : user.images ? <Image onClick={() => history.push('/profile/')} src={host + user.images.image.small_square_crop} avatar className="icon-item-header" /> : <Icon size="large" className="icon-item-header" name="user" onClick={() => history.push('/profile/')} />} />
 
 
           <Dropdown >

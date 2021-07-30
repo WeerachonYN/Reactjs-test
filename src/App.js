@@ -4,7 +4,7 @@ import React,{useEffect} from 'react';
 import Headers from './component/Header';
 import MenuLoginLogout from './component/LoginLogout';
 import Footer from './component/Footer';
-import Content from './testReact/Content';
+import Content from './Page/Content';
 import { useSelector,useDispatch } from 'react-redux';
 import { SET_AUTH } from './redux/Reducer/action.type';
 import axios from 'axios';
@@ -34,7 +34,6 @@ const App = () => {
     <div className="App">
       <MenuLoginLogout />
       <Headers />
-
       <Content />
       <Footer />
     </div>

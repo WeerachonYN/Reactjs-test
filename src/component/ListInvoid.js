@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import '../css/ListInvoid.css'
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios'
-
+import DataTime from './DataTime'
 const ListInvoid = (props) => {
   const { token } = useSelector(state => state.auth)
   const [color, setColor] = useState('red');
@@ -15,51 +15,67 @@ const ListInvoid = (props) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const handleclickId = (_id) => {
-    
+
     return history.push(`/invoid/${_id}/`)
   }
+  const DatetimeForm = (updated) => {
+    let date = new Date(updated);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let dt = date.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    return (dt + '-' + month + '-' + year)
+  }
+
+
 
   return (
 
     <Item >
       {/* <Item.Image src='/images/wireframe/image.png' /> */}
-     
+
       <Item.Content>
         <Item.Header as='h2' ><a href={`/invoid/${props.id}/`}> No. {props.id}</a> </Item.Header>
         <Item.Meta className="meta-item">
-        <List  
-        verticalAlign='middle'
-        horizontal relaxed
-        // divided
-        // animated verticalAlign='middle'
-        >
-          {props.invoices_item.map(item=>
+          <List
+            verticalAlign='middle'
+            horizontal relaxed
 
-            // <p>{item.product.name}</p>
-           <ListHorizontal 
-            id={item.id} 
-            name={item.product.name}
-            image={item.product.image.medium_square_crop}
-            price={item.product.price}
-            quantity={item.quantity}
-            product={item.product.id}
-            /> 
+          >
+            {props.invoices_item.map(item =>
+              <ListHorizontal
+                id={item.id}
+                name={item.product.name}
+                image={item.product.image.medium_square_crop}
+                price={item.product.price}
+                quantity={item.quantity}
+                product={item.product.id}
+              />
             )}
           </List>
 
         </Item.Meta>
         <Item.Meta>
-          <h3 color="red"> ยอดรวม  {props.total} บาท</h3>
+          <h3 color="red"> ยอดรวม  {(props.total).replace(/\d(?=(\d{3})+\.)/g, '$&,')} บาท</h3>
         </Item.Meta>
         <Item.Extra>
-          <p> เวลา   {props.updated}</p>
+          <p> วันที่ {DatetimeForm(props.updated)}</p>
+
+          {/* <p> เวลา   {(props.updated).toLocaleDateString()}</p> */}
         </Item.Extra>
         {/* ?  <Item.Description>{props.updated}</Item.Description> */}
 
         <Item.Extra>
           <Button primary floated='right' onClick={() => handleclickId(props.id)} >รายละเอียด <Icon name='right chevron' /></Button>
-          {disable ?
+          {props.status === 'Cancel' || props.status === 'Success' ?
             <Button color='grey' floated='right' disabled="true"  >ยกเลิกคำสั่งซื้อ </Button>
 
 

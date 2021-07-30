@@ -5,53 +5,45 @@ import { addToCart } from '../redux/actions/cartActions'
 import '../css/viewDetail.css';
 import { Container } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { CATEGORY_IN_REQ, FETCH_CART_REQ, FETCH_PRODUCT_REQ } from '../redux/Reducer/action.type';
+import { CATEGORY_IN_REQ, FETCH_CART_REQ, FETCH_PRODUCT_REQ, GET_COMMENT_REQ } from '../redux/Reducer/action.type';
 import { useSelector } from 'react-redux';
 import { fetchProductAsync } from '../redux/actions/productAction';
 import Carousels from '../component/Carousel';
 import Breadcrumbs from '../component/Breadcrumb';
 import CommentProduct from '../component/Comment'
+
 export default function ViewDetail() {
     const { paramId } = useParams();
-
     const action = (type, payload, token) => dispatch({ type, payload, token })
-    // const post = useFetch(`/product/${paramId}/`);
-
     const history = useHistory();
     const dispatch = useDispatch();
     const { token } = useSelector(state => state.auth)
-    const { data } = useSelector(state => state.product)
+    const { data,comment } = useSelector(state => state.product)
     const { loading, error } = useSelector(state => state.cart)
     const [quantity, setQuantity] = useState(1);
-    const [active, setActive] = useState(null);
+
 
     const handleclickCheckUser = () => {
         if (!token) {
             history.push('/login/');
         } else {
-            // console.log('user=',user.access);
             const payload = { ...data, quantity: quantity }
             action(FETCH_CART_REQ, payload, token)
-            //    setActive('active')
-            // console.log(payload);
-            // dispatch(addToCart({ ...data, quantity: 1 }))
         }
     }
     const handleonClickBreadcrumb=()=>{
-       
        dispatch({type:CATEGORY_IN_REQ,category_in:data.category})
        return  history.push(`/product/?category_in=${data.category}/`)
     }
     useEffect(() => {
-
         dispatch({ type: FETCH_PRODUCT_REQ, payload: paramId })
-        // action(FETCH_PRODUCT_REQ, paramId)
+        dispatch({ type: GET_COMMENT_REQ, id: paramId })
     }, [paramId])
 
     if (!data) {
         return <div />;
     }
-    document.title = `PRODUCT : ${data.name}`
+    document.title = `METRO - ${data.name}`
     return (
         <Container fluid>
             <br />

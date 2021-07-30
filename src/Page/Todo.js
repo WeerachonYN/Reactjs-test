@@ -69,9 +69,10 @@ export default function Todo() {
         setTodos(removeItem)
     }
    
-    document.title = 'TODO'
+    document.title = 'METRO - ABOUT'
     return (
-        <div>{isEditing ? (
+        <div>
+            {/* {isEditing ? (
             <form onSubmit={handleEditSubmit}>
                 <h2>EditeTodo</h2>
                 <input type="text" name="editTodo" placeholder="Edit Todo" 
@@ -92,7 +93,7 @@ export default function Todo() {
                         <button onClick={() => handleDelete(item.id)}>Delete</button>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     )
 }

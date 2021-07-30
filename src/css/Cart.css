@@ -10,6 +10,17 @@
     cursor: pointer;
 }
 
+.img-table {
+  transition: transform 0.5s ease-out;
+  /* z-index: 1; */
+}
+.img-table:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+}
 .icon-trash {
     transition: transform .5s ease;
     /* z-index: 1; */

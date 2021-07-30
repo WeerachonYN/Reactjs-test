@@ -1,36 +1,196 @@
 import React from 'react'
-import '../css/Gallary.css'
-import { Image } from 'semantic-ui-react'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-export default function Gallery() {
-    const [category, setCategory] = useState();
-    const queryData = async () => {
-        try {
-            const response = await axios.get('/category/');
-            setCategory(response.data)
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-    useEffect(() => {
-        queryData()
+import '../css/Counter.css'
+import { Image ,Card,Reveal} from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
+import { CATEGORY_IN_REQ, PAGE_PRODUCT_REQ, SORT_WORD_REQ } from '../redux/Reducer/action.type';
+import { useSelector,useDispatch } from 'react-redux';
 
-    }, [])
-    if (!category) {
-        return <h1>Loading...</h1>
+export default function Gallery(props) {
+    const {search} =useSelector(state=>state.product)
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const handleClickHis=(_id)=>{
+        dispatch({ type: CATEGORY_IN_REQ, category_in:_id  });
+        dispatch({type:SORT_WORD_REQ,sort:null})
+        dispatch({type:PAGE_PRODUCT_REQ,page:1})
+        if(search){
+          return history.push(`/product/?search=${search}&category_in=${_id}`)
+        }else{
+          return history.push(`/product/?category_in=${_id}`)
+        }
+       
     }
-    console.log(category);
     return (
-        <div className="gallery-wrapper">
-            <div className="gallery-scroll">
-                <div className="gallery">
-                    {category.data.results.map(item => <div key={item.id} className="item-gallary">
-                        <Image className="image-gallary" src={item.image.medium_square_crop} />
-                    </div>)}
-                </div>
-            </div>
-        </div>
+        <div className="grid-category">
+        <Card className="item-category" onClick={()=> handleClickHis(1)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/1.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/2.jpg"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >เครื่องใช้ไฟฟ้าขนาดเล็ก</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(2)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/3.png"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/4.png"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >เครื่องกรองน้ำ</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(3)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/5.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/6.jpg"
+                        />
+                    </Reveal.Content>
+                   
+                </Reveal> 
+                <Card.Header className="card-Header" >เครื่องซักผ้า</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(4)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/7.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/8.jpg"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >เครื่องปรับอากาศ</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(5)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/9.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/10.jpg"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >ตู้เย็น</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(6)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/11.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/12.jpg"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >พัดลม</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(7)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/13.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/14.jpg"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >พัดลม</Card.Header>
+            </Card.Content>
+        </Card>
+        <Card className="item-category" onClick={()=> handleClickHis(8)}>
+            <Card.Content className="content-category">
+                <Reveal animated='small fade'>
+                    <Reveal.Content visible>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/15.jpg"
+                        />
+                    </Reveal.Content>
+                    <Reveal.Content hidden>
+                        <Image 
+                            floated='right'
+                            size='big'
+                            src="category/16.png"
+                        />
+                    </Reveal.Content>
+                </Reveal>
+                <Card.Header className="card-Header" >เครื่องทำน้ำอุ่น</Card.Header>
+            </Card.Content>
+        </Card>
+    </div>
     )
 }

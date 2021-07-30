@@ -1,23 +1,17 @@
-import React, { useDebugValue, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useSelector ,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router'
 import { useHistory } from 'react-router-dom'
-import { Item, Image, Form, Input, Loader, Dimmer, Container, TextArea, Segment, Divider, Header, Label, Grid } from 'semantic-ui-react'
+import { Item, Form, Input, Container, TextArea,Breadcrumb, Segment, Divider, Header, Label, Grid } from 'semantic-ui-react'
 import '../css/invoidDetail.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import Breadcrumbs from '../component/Breadcrumb'
-import CommentTag from '../component/CommentTag'
-import { GET_INVOID_REQ,CATEGORY_IN_REQ } from '../redux/Reducer/action.type'
+import {  CATEGORY_IN_REQ } from '../redux/Reducer/action.type'
 export default function InvoidDetail() {
-    // const { data_in } = useSelector(state => state.invoid)
     const { user, token } = useSelector(state => state.auth)
-    const [color, setColor] = useState('grey');
     const [random, setRandom] = useState(0);
     const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
     const dispatch = useDispatch();
-  
     const { id } = useParams()
     const history = useHistory()
     const fetDetail = async (id) => {
@@ -38,23 +32,29 @@ export default function InvoidDetail() {
 
     useEffect(() => {
         fetDetail(id)
-        document.title = `INVOID - ${id}`
+        document.title = `METRO - INVOID NO.${id}`
 
         setRandom(Math.floor(Math.random() * 100))
     }, [id])
     const handleFilter = (id) => {
         dispatch({ type: CATEGORY_IN_REQ, category_in: id });
         return history.push(`/product/?category_in=${id}`)
-      }
+    }
     if (!data) {
         return <div />
     }
     return (
         <div className="invoid-detail">
 
-            <Container  fluid >
-                <br/>
-                <Breadcrumbs />
+            <Container fluid >
+                <br />
+                <Breadcrumb className="breadcrumb">
+                    <Breadcrumb.Section link onClick={() => history.push('/')}>Home</Breadcrumb.Section>
+                    <Breadcrumb.Divider />
+                    <Breadcrumb.Section link onClick={() => history.push('/invoid/')} >Invoid</Breadcrumb.Section>
+                    <Breadcrumb.Divider />
+                    <Breadcrumb.Section active >รายละเอียดคำสั่งซื้อ-{id}</Breadcrumb.Section>
+                </Breadcrumb>
                 <br />
                 <Divider horizontal>
                     <Header as='h2'>
@@ -104,8 +104,8 @@ export default function InvoidDetail() {
                                                 {item.product.detail}
                                             </Item.Description>
                                             <Item.Extra>
-                                                <Label size="medium" color="orange" >฿ {item.product.price}</Label>
-                                                <Label size="medium" className="labe-category" icon='cube' content={item.product.category} color="teal" onClick={()=> handleFilter(item.product.category_id)} />
+                                                <Label size="medium" color="orange" >฿ {(item.product.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Label>
+                                                <Label size="medium" className="labe-category" icon='cube' content={item.product.category} color="teal" onClick={() => handleFilter(item.product.category_id)} />
 
 
 
@@ -122,7 +122,7 @@ export default function InvoidDetail() {
                                             <Item.Extra >
                                                 <Item.Description>
 
-                                                     ฿ {(item.quantity*item.product.price).toFixed(2)}
+                                                    ฿ {(item.quantity * item.product.price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
 
                                                 </Item.Description>
                                             </Item.Extra>
@@ -136,7 +136,7 @@ export default function InvoidDetail() {
 
                             </Item>
                         )}
-                        </Item.Group>
+                    </Item.Group>
                 </Segment>
                 <Segment.Group>
                     <Segment >
@@ -169,13 +169,13 @@ export default function InvoidDetail() {
                                 <Form.Group inline className="form-group-invoid">
                                     <Form.Field>
                                         <label>เบอร์โทร</label>
-                                        <Input placeholder='(xxx)'readOnly />
+                                        <Input placeholder='(xxx)' readOnly />
                                     </Form.Field>
                                     <Form.Field>
                                         <Input placeholder='xxx' readOnly />
                                     </Form.Field>
                                     <Form.Field>
-                                        <Input placeholder='xxxx' readOnly/>
+                                        <Input placeholder='xxxx' readOnly />
                                     </Form.Field>
                                 </Form.Group>
                             </Form></Segment>
@@ -183,7 +183,7 @@ export default function InvoidDetail() {
                     <Segment.Group>
                         <Segment.Group horizontal  >
                             <Segment textAlign="right" className="segment-invoid"><p>รวมค่าสินค้า</p></Segment>
-                            <Segment textAlign="right" className="segment-invoid"><p>฿ {data.data.total}</p></Segment>
+                            <Segment textAlign="right" className="segment-invoid"><p>฿ {(data.data.total).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</p></Segment>
                         </Segment.Group>
                         <Segment.Group horizontal >
                             <Segment textAlign="right" className="segment-invoid"><p>ค่าจัดส่ง</p></Segment>
@@ -191,10 +191,10 @@ export default function InvoidDetail() {
                         </Segment.Group>
                     </Segment.Group>
                     <Segment.Group>
-                        <Segment textAlign="right"className="segment-invoid"><p>ยอดคำสั่งซื้อทั้งหมด</p></Segment>
-                        <Segment textAlign="right"className="segment-invoid">
+                        <Segment textAlign="right" className="segment-invoid"><p>ยอดคำสั่งซื้อทั้งหมด</p></Segment>
+                        <Segment textAlign="right" className="segment-invoid">
                             <Header as='h4' color="orange" >
-                                ฿ {(random + parseFloat(data.data.total)).toFixed(2)}
+                                ฿ {(random + parseFloat(data.data.total)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                             </Header>
                         </Segment>
                     </Segment.Group>

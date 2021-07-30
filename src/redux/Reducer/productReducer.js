@@ -24,6 +24,7 @@ const initialState = {
     loading: false,
     error: '',
     comment:[],
+   
 }
 export function productReducer(state = initialState, action) {
     switch (action.type) {
@@ -89,6 +90,7 @@ export function productReducer(state = initialState, action) {
                     ...state,
                     comment:action.payload
                 }
+          
         default:
             return state
     }

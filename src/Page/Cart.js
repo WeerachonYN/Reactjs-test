@@ -12,22 +12,19 @@ export default function Cart() {
     const [word, setWord] = useState('');
     const { cart } = useSelector(state => state.cart)
     const { token } = useSelector(state => state.auth)
-
-    const { error } = useSelector(state => state.invoid)
     const [quantity, setQuantity] = useState(0)
     const [id, setId] = useState(null)
     const history = useHistory()
     const [open, setOpen] = useState(false)
+    const [conDel,setConDel] = useState(false)
     const [open_checkout, setOpen_checkout] = useState(false)
     const action = (type, payload, token) => dispatch({ type, payload, token })
     const dispatch = useDispatch()
-    document.title = "CART"
+    document.title = "METRO - CART"
 
     const host = process.env.REACT_APP_API_HOST;
 
     const handleUpdateInput = (value, _id) => {
-
-        // console.log('Event:', value);
         if (!isNaN(value)) {
             handleUpdate(_id, value)
         }
@@ -56,15 +53,21 @@ export default function Cart() {
         } else if (type === 'update') {
             action(UPDATE_CART_REQ, { id: id, quantity: quantity }, token)
             setOpen(false)
-            return
+        }else if(type ==='del'){
+            setConDel(false)
+            return action(DELETE_CART_REQ, id, token) 
         }
 
     }
     const handleCancel = () => {
         setOpen(false)
         setOpen_checkout(false)
+        setConDel(false)
     }
-
+    const handledelete=(_id)=>{
+        setConDel(true)
+        setId(_id)
+    }
 
     if (cart.length == 0) {
         return <Container fluid>
@@ -111,7 +114,7 @@ export default function Cart() {
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
-                            <Table.HeaderCell textAlign='center'>{item.product.price}</Table.HeaderCell>
+                            <Table.Cell textAlign='center'>฿ {(item.product.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Table.Cell>
 
                             <Table.Cell textAlign="center" >
                                 <div className="btn-groupza">
@@ -143,10 +146,10 @@ export default function Cart() {
 
                                 </div>
                             </Table.Cell>
-                            <Table.Cell textAlign='center'>{(item.product.price * item.quantity).toFixed(2)}</Table.Cell>
-                            <Table.Cell textAlign='center'><a style={{ cursor: 'pointer' }} onClick={() => action(DELETE_CART_REQ, item.id, token)}><Icon className="icon-trash" name='trash' color="red" size='large' /></a></Table.Cell>
+                            <Table.Cell textAlign='center'>฿ {(item.product.price * item.quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Table.Cell>
+                            <Table.Cell textAlign='center'><a style={{ cursor: 'pointer' }} onClick={() => handledelete(item.id)}><Icon className="icon-trash" name='trash' color="red" size='large' /></a></Table.Cell>
                         </Table.Row>
-                    )}
+                    ).reverse()}
 
                 </Table.Body>
                 <Table.Footer>
@@ -155,7 +158,7 @@ export default function Cart() {
                         <Table.HeaderCell></Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
                         <Table.HeaderCell textAlign='center'>{cart.reduce((sum, item) => sum + item.quantity, 0)}</Table.HeaderCell>
-                        <Table.HeaderCell textAlign='center'>{cart.reduce((sum, item) => sum + (item.quantity * item.product.price), 0).toFixed(2)}</Table.HeaderCell>
+                        <Table.HeaderCell textAlign='center'>฿ {cart.reduce((sum, item) => sum + (item.quantity * item.product.price), 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Table.HeaderCell>
                         <Table.HeaderCell textAlign='center'><Button color="green" content='Check Out' onClick={() => setOpen_checkout(true)} /></Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
@@ -168,6 +171,15 @@ export default function Cart() {
                 onCancel={() => handleCancel()}
                 onConfirm={() => handleConfirm('update')}
             />
+               <Confirm size='mini'
+                open={conDel}
+                content='คุณต้องการลบสินค้า ?'
+                cancelButton='ยกเลิก'
+                confirmButton="ลบสินค้า"
+                onCancel={() => handleCancel()}
+                onConfirm={() => handleConfirm('del')}
+            />
+            
             <Confirm size='mini'
                 open={open_checkout}
                 content='ยืนยันคำสั่งซื้อ ?'
@@ -175,6 +187,7 @@ export default function Cart() {
                 confirmButton="ยืนยัน"
                 onCancel={() => handleCancel()}
                 onConfirm={() => handleConfirm('checkout')}
+                
             />
         </Container>
     )

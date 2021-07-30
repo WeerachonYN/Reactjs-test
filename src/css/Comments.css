@@ -1,0 +1,7 @@
+.contain-comment{
+    width: 100% ;
+    min-height: min-content ;
+    max-height: 400px;
+    display: block ;
+    overflow: scroll;
+}

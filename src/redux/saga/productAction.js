@@ -1,6 +1,6 @@
 import { put, call } from "@redux-saga/core/effects"
 import { fetchProduct, postComment, getComment } from "../../api/fetchProduct";
-import { CATEGORY_IN, SORT_WORD, SEARCH_WORD, FETCH_PRODUCT, FETCH_PRODUCT_ALL, PRODUCT_END, PRODUCT_ERROR, PRODUCT_START, CATEGORY_NOT_IN, PAGE_PRODUCT, PAGESIZE_PRODUCT, SET_COMMENT, GET_COMMENT_REQ } from "../Reducer/action.type";
+import { CATEGORY_IN, SORT_WORD, SEARCH_WORD, FETCH_PRODUCT, FETCH_PRODUCT_ALL, PRODUCT_END, PRODUCT_ERROR, PRODUCT_START, CATEGORY_NOT_IN, PAGE_PRODUCT, PAGESIZE_PRODUCT, SET_COMMENT, GET_COMMENT_REQ, SET_COMMENT_REQ } from "../Reducer/action.type";
 export function* fetchProductAsync({ payload }) {
     // yield console.log('Param ID :',payload);
 
@@ -43,18 +43,21 @@ export function* pageSize_Product({ page_size }) {
     yield put({ type: PAGESIZE_PRODUCT, page_size: page_size })
 }
 
-export function* setCOMMENT({ token, message,product }) {
+export function* setCOMMENT({ token, message,product}) {
+      
     try {
         yield call(postComment, { token, message,product })
-        yield put({ type: PRODUCT_ERROR, payload: null })
+        yield put({type:GET_COMMENT_REQ,id:product})
+        yield put({ type: PRODUCT_ERROR, payload: null})
     } catch (error) {
         yield put({ type: PRODUCT_ERROR, payload: error?.response.data || error })
+  
     }
 }
-export function* getCOMMENT({ token }) {
+export function* getCOMMENT({id}) {
     try {
-        const message = yield call(getComment, token)
-        yield put({ type: SET_COMMENT, payload: message })
+        const message = yield call(getComment,id)
+        yield put({ type: SET_COMMENT, payload: message})
     } catch (error) {
         console.log(error);
     }

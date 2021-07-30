@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../css/Card.css'
-import { Image, Popup, Card, Icon,Label, Transition } from 'semantic-ui-react'
+import { Image, Popup, Card, Icon, Label, Transition,Placeholder, Rating } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -13,45 +13,61 @@ function CardProduct(props) {
     return history.push(`/product/${props.id}/`);
   }
   return (
-    // <Grid.Column> 
 
     <Popup
-      content={props.detail}
+      content={<Rating icon='star' defaultRating={3} maxRating={4} />}
       key={props.id}
       header={props.title}
+      disabled={props.loading}
       trigger={
 
-
-
         <Card centered className="Card" color="red" key={props.id}>
-          {/* <Image onClick={handleClick} className="imageCard" src={props.image} wrapped ui={false} /> */}
-          <LazyLoadImage
-            onClick={handleClick}
-            effect="blur"
-            className="imageCard"
-            wrapped ui={false}
-            src={props.image} />
-            
-            
+          {props.loading ? (
+            <Placeholder>
+              <Placeholder.Image square />
+            </Placeholder>
+          ) : (
+            <LazyLoadImage
+              onClick={handleClick}
+              effect="blur"
+              className="imageCard"
+              wrapped ui={false}
+              src={props.image} />
+          )}
+
           <Card.Content>
-            <Card.Header className="card-Header" onClick={handleClick} >{props.title}</Card.Header>  
-            <Card.Description >
-              {props.detail}
-              
-            </Card.Description>
-            <Card.Meta >
-              <h2>฿ {props.price}</h2>
-            
-            </Card.Meta>
+            {props.loading ? (
+              <Placeholder>
+                <Placeholder.Header>
+                  <Placeholder.Line length='very short' />
+                  <Placeholder.Line length='medium' />
+                </Placeholder.Header>
+                <Placeholder.Paragraph>
+                  <Placeholder.Line length='short' />
+                </Placeholder.Paragraph>
+              </Placeholder>
+            ) : (
+              <Card.Content>
+                <Card.Header className="card-Header" onClick={handleClick} >{props.title}</Card.Header>
+                <Card.Description >
+                  {props.detail}
+
+                </Card.Description>
+                <Card.Meta >
+                  <h2>฿ {(props.price).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</h2>
+
+                </Card.Meta>
+              </Card.Content>
+            )}
           </Card.Content>
-          <Card.Content extra>
+
+          <Card.Content extra textAlign="center">
             <p onClick={handleClick}>
               <Icon name='comment' />
-              10 Comments
+              {props.loading?0:props.comment} Comments
             </p>
           </Card.Content>
         </Card>
-
       }>
 
     </Popup>
